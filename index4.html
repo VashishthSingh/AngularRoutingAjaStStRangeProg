@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="UTF-8">
+	<title>Angular Integration with servlet</title>
+
+	<style type="text/css">
+		input{margin-top:20px;margin-left: 10px;}
+		#getDataBtn{margin-left: 210px;}
+	</style>
+
+</head>
+<body>
+
+		<input id="datetimepicker1" type="text" ng-model="startRange" placeholder="Enter starting Date Time"/>
+		<input id="datetimepicker2" type="text" ng-model="endRange" placeholder="Enter ending Date Time"/><br><br>
+		<button id="getDataBtn" ng-click="dataArrayList()">Get Data</button>
+
+		<table border="2" cellspaceing="2">
+			<tr>
+				<th>ReadDateAndTime</th>
+				<th>RamUsed</th>
+				<th>DiskUsed</th>
+				<th>CpuUsed</th>
+			</tr>
+			<tr ng-repeat="objData in JSONData">
+				<td>{{objData.map.readDateAndTime}}</td>
+				<td>{{objData.map.ramUsed}}</td>
+				<td>{{objData.map.diskUsed}}</td>
+				<td>{{objData.map.cpuUsed}}</td>
+			</tr>
+		</table>
+		
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	
+	<meta charset="UTF-8">
+	<title>Angular Integration with servlet</title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	
+	<script type="text/javascript">
+		var app=angular.module('myApp', []);
+		app.controller('myCtrl',['$scope','$window','$http',function($scope,$window,$http){  // $scope , $window , $http
+			
+			$scope.startBtn=function(){
+				$http({
+					url:"http://localhost:8080/AngularFirst/StartFetchingData",
+					method:"GET",
+				}).then(function(response){
+					$scope.statusCode=response.status;
+				},function(response){
+					$window.alert("Connection Failed");
+				});
+			}
+		
+			$scope.stopBtn=function(){
+				$http({
+					url:"http://localhost:8080/AngularFirst/StopFetchingData",
+					method:"GET",
+				}).then(function(response){
+					$scope.statusCode=response.status;
+				},function(response){
+					$window.alert("Connection Failed");
+				});
+			}
+			
+		}]);
+		
+	</script>
+
+</head>
+<body ng-controller="myCtrl">
+
+		<button id="getDataBtn" ng-click="startBtn()">START</button>
+		<button id="getDataBtn" ng-click="stopBtn()">STOP</button>
+
+</body>
+</html>

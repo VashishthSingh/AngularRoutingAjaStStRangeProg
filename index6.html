@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+	
+	<script>
+		var app = angular.module("myApp", ["ngRoute"]);
+		app.config(function($routeProvider) {
+    		$routeProvider
+    		.when("/report", {
+        		templateUrl : "index4.html",
+        		controller: "myCtrl"
+    		})
+    		.when("/admin", {
+        		templateUrl : "index5.html",
+        		controller: "myCtrl1"
+    		})
+		});
+		
+		app.controller('myCtrl',['$scope','$window','$http',function($scope,$window,$http){  // $scope , $window , $http
+			$scope.dataArrayList=function(){
+				$http({
+					url:"http://localhost:8080/AngularFirst/AngularJsServlet1",
+					method:"GET",
+					params:{
+						"startRange":$scope.startRange,
+						"endRange":$scope.endRange
+					}
+				}).then(function(response){
+					$scope.JSONData=response.data.myArrayList;
+					$scope.statusCode=response.status;
+					$window.alert(JSONData);
+				},function(response){
+					$window.alert("Connection Failed");
+				});
+			}
+		}]);
+		
+		app.controller('myCtrl1',['$scope','$window','$http',function($scope,$window,$http){  // $scope , $window , $http
+			$scope.startBtn=function(){
+				$http({
+					url:"http://localhost:8080/AngularFirst/StartFetchingData",
+					method:"GET",
+				}).then(function(response){
+					$scope.statusCode=response.status;
+				},function(response){
+					$window.alert("Connection Failed");
+				});
+			}
+
+			$scope.stopBtn=function(){
+				$http({
+					url:"http://localhost:8080/AngularFirst/StopFetchingData",
+					method:"GET",
+				}).then(function(response){
+					$scope.statusCode=response.status;
+				},function(response){
+					$window.alert("Connection Failed");
+				});
+			}
+	
+		}]);
+	</script>
+	
+	<style type="text/css">
+		a{text-decoration: none;margin:10px;}
+	</style>
+	
+<body ng-app="myApp">
+
+	<a href="#!report">Report</a>
+	<a href="#!admin">Admin</a>
+
+	<div ng-view>
+	</div>
+
+</body>
+</html>
+

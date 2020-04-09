@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+	<script type="text/javascript" src="angularjs.js"></script>
+
+</head>
+<body>
+	
+	<div ng-app="myApp">
+        <div ng-controller="myCtrl">
+<!--            {{statuscode}}  Printing status code -->
+           <table border="2" cellspacing="3">
+		   		<tr>
+					<th>ReadDAteAndTime</th>
+					<th>RamUsed</th>
+					<th>DiskUsed</th>
+					<th>CpuUsed</th>
+				</tr>
+			  	<tr ng-repeat="data in myRes">
+					<td>{{data.map.readDateAndTime}}</td>
+					<td>{{data.map.ramUsed}}</td>
+					<td>{{data.map.diskUsed}}</td>
+					<td>{{data.map.cpuUsed}}</td>
+				</tr>
+		   </table>
+		   
+<!--             	<div ng-repeat="data in myRes"> -->
+<!--                 		 <h3>{{data.map.ramUsed+ "    " +data.map.diskUsed+ "    "+data.map.cpuUsed+ "    "+data.map.readDateAndTime}}</h3>    -->
+<!--             	</div> -->
+
+         </div>
+	</div>
+
+</body>
+</html>
